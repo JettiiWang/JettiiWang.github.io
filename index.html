@@ -52,6 +52,7 @@
          alert('QQ登录 注销成功');
    }
 );
+	var paras={};
 	QC.api("get_user_info", paras)
 	.success(function(s){//成功回调
 		console.log(s)	})
