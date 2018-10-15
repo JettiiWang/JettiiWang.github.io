@@ -52,6 +52,16 @@
          alert('QQ登录 注销成功');
    }
 );
+	QC.api("get_user_info", paras)
+	.success(function(s){//成功回调
+		console.log(s)	})
+	.error(function(f){//失败回调
+		alert("获取用户信息失败！");
+	})
+	.complete(function(c){//完成请求回调
+		alert("获取用户信息完成！");
+	});
+
 </script>
 </script>
 </body>
