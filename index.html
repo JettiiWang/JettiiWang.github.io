@@ -62,7 +62,10 @@
 	.complete(function(c){//完成请求回调
 		alert("获取用户信息完成！");
 	});
-
+	 QC.Login.getMe(function (openId, accessToken) {
+	 	console.log(openId);
+		console.log(accessToken);
+	 })
 </script>
 </script>
 </body>
