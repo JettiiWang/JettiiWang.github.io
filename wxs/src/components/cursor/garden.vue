@@ -29,10 +29,15 @@
         if (this.contentIndex >= this.flowerContents.length) {
           this.contentIndex = 0
         }
+        if(!this.IsPC){
+          var touch = event.changedTouches[0];
+          console.log(touch.clientX)
+        }
+        
         this.flowers.push({
           id: ++this.id,
-          x: event.x || event.clientX,
-          y: event.y || event.clientY,
+          x: event.x || event.clientX || touch.clientX,
+          y: event.y || event.clientY || touch.clientY,
           text: this.flowerContents[this.contentIndex]
         })
       },
@@ -41,13 +46,43 @@
         if (targetIndex > -1) {
           this.flowers.splice(targetIndex, 1)
         }
+      },
+      
+    },
+    computed:{
+      IsPC() {
+        var userAgentInfo = navigator.userAgent;
+        var Agents = ["Android", "iPhone",
+                    "SymbianOS", "Windows Phone",
+                    "iPad", "iPod"];
+        var flag = true;
+        for (var v = 0; v < Agents.length; v++) {
+            if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
       }
     },
     mounted() {
-      window.addEventListener('click', this.eventHandle)
+      if(this.IsPC){
+        window.addEventListener('mousedown', this.eventHandle)
+      }else{
+        window.addEventListener('touchend', this.eventHandle)
+      }
+      document.oncontextmenu=function(){
+      return false;
+      }
+      
     },
     beforeDestroy() {
-      window.removeEventListener('click', this.eventHandle)
+      if(this.IsPC){
+        window.removeEventListener('click', this.eventHandle)
+      }else{
+        window.removeEventListener('touchend', this.eventHandle)
+      }
+      // window.removeEventListener('click', this.eventHandle)
     }
   }
 </script>

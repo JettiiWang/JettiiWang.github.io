@@ -5,7 +5,9 @@ import App from './App'
 import router from './router'
 
 Vue.config.productionTip = false
-
+if(process.env.NODE_ENV=='development'){
+  var vConsole = new VConsole();
+}
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
