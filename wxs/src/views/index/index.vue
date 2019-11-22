@@ -15,7 +15,6 @@ export default {
         }
     },
     mounted(){
-        alert('欢迎')
     }
 }
 </script>
